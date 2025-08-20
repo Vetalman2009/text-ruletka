@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Рулетка текстом с цветами</title>
+<style>
+  body { background:#111; color:#eee; font-family:sans-serif; text-align:center; padding:20px; }
+  h1 { margin-bottom:10px; }
+  .slot {
+    font-size: 28px;
+    font-weight: bold;
+    color: #0ff;
+    margin: 20px 0;
+    min-height: 40px;
+  }
+  button {
+    background: #0ff; border: none; padding: 12px 28px; margin-top: 12px;
+    font-size: 16px; font-weight: bold; color: #000; cursor: pointer;
+    border-radius: 8px;
+  }
+</style>
+</head>
+<body>
+
+<h1>🎰 Рулетка текстом с цветами</h1>
+
+<div id="slot-clubs" class="slot">Нажми «Старт»</div>
+<button onclick="spin('clubs')">Крутить клубы</button>
+
+<div id="slot-sponsors" class="slot">Нажми «Старт»</div>
+<button onclick="spin('sponsors')">Крутить спонсоров</button>
+
+<div id="slot-brands" class="slot">Нажми «Старт»</div>
+<button onclick="spin('brands')">Крутить бренды</button>
+
+<div id="slot-colors" class="slot">Нажми «Старт»</div>
+<button onclick="spin('colors')">Крутить цвета</button>
+
+<script>
+  const data = {
+    clubs: ["Барселона","Реал Мадрид","Манчестер Юнайтед","Ювентус","ПСЖ","Бавария","Ливерпуль","Челси","Манчестер Сити","Арсенал","Атлетико","Интер","Милан","Тоттенхэм","Рома","Наполи","Бенфика","Порту","Аякс","Марсель","Севилья","Лион","Дортмунд","РБ Лейпциг","Валенсия","Эвертон","Ньюкасл","Астон Вилла","Селтик","Рейнджерс"],
+    sponsors: ["Emirates","Qatar Airways","Etihad","Nike","Adidas","Puma","Spotify","Rakuten","Jeep","Red Bull","Coca-Cola","Pepsi","Heineken"],
+    brands: ["Nike","Adidas","Puma","Under Armour","New Balance","Reebok","Asics","Mizuno","Fila","Jordan","Converse","Skechers","Columbia","The North Face","Salomon"],
+    colors: ["Красный","Оранжевый","Жёлтый","Зелёный","Голубой","Синий","Фиолетовый","Розовый","Коричневый","Белый","Чёрный","Серый","Бирюзовый","Лаймовый","Бежевый"]
+  };
+
+  function spin(type) {
+    const slot = document.getElementById("slot-" + type);
+    const items = data[type];
+    let i = 0;
+    slot.textContent = "Крутится...";
+    let interval = setInterval(() => {
+      slot.textContent = items[i % items.length];
+      i++;
+    }, 100);
+
+    setTimeout(() => {
+      clearInterval(interval);
+      const final = items[Math.floor(Math.random() * items.length)];
+      slot.textContent = "🎉 Выпало: " + final;
+    }, 3000); // 3 секунды прокрутки
+  }
+</script>
+
+</body>
+</html>
